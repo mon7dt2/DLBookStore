@@ -1,6 +1,7 @@
 package com.base.mvvmbasekotlin
 
 import com.base.mvvmbasekotlin.base.BaseActivity
+import com.base.mvvmbasekotlin.ui.splash.SplashFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,6 +17,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initView() {
+        getViewController().addFragment(SplashFragment::class.java);
 
     }
 

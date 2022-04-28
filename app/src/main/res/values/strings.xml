@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppName</string>
+    <string name="app_name">DucLuong BookStore</string>
     <string name="error_place_holder">Error Happened.Try again!</string>
     <integer name="activity_anim_duration">300</integer>
     <integer name="activity_anim_duration_out">500</integer>
