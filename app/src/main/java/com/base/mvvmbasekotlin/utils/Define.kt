@@ -35,6 +35,14 @@ open class Define {
         }
     }
 
+    open class ToastMessage {
+        companion object {
+            val SIGNIN_PHONE_INVALID = "Số điện thoại không hợp lệ"
+            val SIGNIN_PASSWORD_INVALID = "Mật khẩu không hợp lệ"
+            val SIGNIN_INVALID = "Tên tài khoản mặt mật khẩu không đúng"
+        }
+    }
+
     object Bus {
         val ACCESS_TOKEN_EXPIRED = "ACCESS_TOKEN_EXPIRED"
     }

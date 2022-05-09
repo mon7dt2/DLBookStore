@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">DucLuong BookStore</string>
     <string name="error_place_holder">Error Happened.Try again!</string>
+    <string name="rememberPass">Nhớ mật khẩu</string>
+    <string name="login">Đăng Nhập</string>
+    <string name="register">Đăng Ký</string>
+    <string name="password">Mật Khẩu</string>
+    <string name="forgotPassword">Quên mật khẩu?</string>
+    <string name="phone">Số điện thoại</string>
+    <string name="name">Họ và tên</string>
     <integer name="activity_anim_duration">300</integer>
     <integer name="activity_anim_duration_out">500</integer>
 </resources>

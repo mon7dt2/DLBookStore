@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import com.base.mvvmbasekotlin.custom.LoadingDialog
 
 abstract class BaseFragment : Fragment() {
 
     private var viewController : ViewController? = null
 
-//    private val loadingDialog : LoadingDialog by lazy { LoadingDialog(requireContext()) }
+    protected val loadingDialog : LoadingDialog by lazy { LoadingDialog(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater,

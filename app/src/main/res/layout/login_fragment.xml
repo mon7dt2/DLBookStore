@@ -10,8 +10,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:background="@color/colorPrimary"
-    android:layout_height="fill_parent"
-    tools:context=".ui.login.LoginFragment">
+    android:layout_height="fill_parent">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="250dp"
@@ -38,28 +37,39 @@
             android:layout_height="50dp"
             android:id="@+id/edtPhone"
             android:background="@drawable/bg_edt1"
-            android:hint="Số điện thoại"
+            android:hint="@string/phone"
             android:maxLines="1"
             android:layout_weight="1"
             android:drawablePadding="10dp"
             app:endIconMode="clear_text"
-            android:inputType="textAutoComplete"
-            android:paddingStart="10dp"
-            android:layout_above="@id/layoutEdtPass"/>
+            android:inputType="phone"
+            android:paddingStart="10dp" />
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_clear_white"
-            android:id="@+id/imgClearEmail"/>
+            android:id="@+id/imgClearPhone"/>
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/forgotPassword"
+        android:textSize="16sp"
+        android:layout_below="@id/layoutEdtMail"
+        android:layout_marginTop="10dp"
+        android:gravity="right"
+        android:textColor="@color/white"
+        android:paddingRight="20dp"
+        android:id="@+id/txtForgetPass" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/layoutEdtPass"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/layoutEdtMail"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/txtForgetPass"
         android:layout_centerHorizontal="true"
         app:hintEnabled="false"
         app:passwordToggleEnabled="true"
@@ -71,7 +81,7 @@
             android:background="@drawable/bg_edt1"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:hint="Mật Khẩu"
+            android:hint="@string/password"
             android:maxLines="1"
             android:drawablePadding="10dp"
             android:inputType="textPassword"
@@ -79,23 +89,40 @@
             android:paddingStart="10dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/layoutRemember"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Quên mật khẩu?"
-        android:textSize="16sp"
-        android:layout_below="@id/layoutEdtPass"
+        android:layout_height="30dp"
+        android:layout_below="@+id/layoutEdtPass"
         android:layout_marginTop="20dp"
-        android:gravity="right"
-        android:textColor="@color/white"
-        android:paddingRight="15dp"
-        android:id="@+id/txtForgetPass" />
+        android:gravity="end"
+        android:orientation="horizontal"
+        android:paddingEnd="20dp">
+
+        <CheckBox
+            android:id="@+id/checkBoxRememberLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:button="@drawable/bg_checkbox"
+            android:checked="true"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rememberPass"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#FF0000"
+        android:textColor="@color/colorAccent"
         android:id="@+id/txtError"
-        android:layout_below="@id/txtForgetPass"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/layoutRemember"
         android:gravity="center"
         android:textSize="16sp" />
     <Button
@@ -105,12 +132,12 @@
         android:layout_marginRight="20dp"
         android:background="@drawable/bg_btn1"
         android:layout_below="@+id/txtError"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:textColor="@color/white"
         android:textAllCaps="false"
         android:textSize="18sp"
-        android:id="@+id/btnLogin"
-        android:text="Đăng Nhập"/>
+        android:id="@+id/btnLogin1"
+        android:text="@string/login"/>
 
     <Button
         android:layout_width="match_parent"
@@ -118,12 +145,12 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/bg_btn2"
-        android:layout_below="@+id/btnLogin"
+        android:layout_below="@+id/btnLogin1"
         android:layout_marginTop="10dp"
         android:textColor="@color/white"
         android:textAllCaps="false"
         android:textSize="18sp"
-        android:id="@+id/btnRegister"
-        android:text="Đăng Ký"/>
+        android:id="@+id/btnRegister1"
+        android:text="@string/register"/>
 </RelativeLayout>
 </ScrollView>

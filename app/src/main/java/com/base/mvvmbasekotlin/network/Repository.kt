@@ -10,7 +10,7 @@ class Repository @Inject constructor(private val apiInterface: ApiInterface) {
 
     fun adminLogin(encodedString: String): Single<AuthResponse> {
         return apiInterface.adminLogin(encodedString)
-            .observeOn(Schedulers.io())
-            .subscribeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 }

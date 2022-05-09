@@ -97,7 +97,7 @@ class ViewController(
         return if (listFragment.size >= 2) {
             listFragment.removeAt(listFragment.size - 1)
             val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.setCustomAnimations(R.anim.trans_right_out, R.anim.trans_right_out)
+            fragmentTransaction.setCustomAnimations(R.anim.trans_left_in, R.anim.trans_left_out)
             currentFragment?.let {
                 fragmentTransaction.remove(it)
             }

@@ -7,7 +7,7 @@ import java.util.regex.Pattern
  * Created by Mon7 on 4/28/2022.
  *
  */
-class ValidatePhone {
+object ValidatePhone {
     private val VALID_VN_PHONE_REGEX: Pattern =
         Pattern.compile("(84|0[3|5|7|8|9])+([0-9]{8})\\b", Pattern.CASE_INSENSITIVE)
 

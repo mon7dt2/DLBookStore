@@ -1,10 +1,13 @@
 package com.base.mvvmbasekotlin.ui.login
 
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import com.base.mvvmbasekotlin.R
 import com.base.mvvmbasekotlin.base.BaseFragment
-import com.base.mvvmbasekotlin.utils.ValidatePhone
+import com.base.mvvmbasekotlin.ui.register.RegisterFragment
+import com.base.mvvmbasekotlin.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.login_fragment.*
 
@@ -15,30 +18,58 @@ class LoginFragment : BaseFragment() {
     }
 
     override val layoutId: Int
-        get() = R.layout.login_fragment;
+        get() = R.layout.login_fragment
 
     override fun initView() {
-
+        EditTextUtils.setEditText(edtPhone, imgClearPhone)
+        viewModel.loading.observe(this, { isLoading: Boolean? ->
+            if (isLoading != null) {
+                if (isLoading) {
+                    loadingDialog.show()
+                } else {
+                    loadingDialog.hide()
+                }
+            }
+        })
+        viewModel.getResponse().observe(requireActivity(), { response : String? ->
+            if(response.equals("HTTP OK")){
+                Toast.makeText(requireContext(), "OK", Toast.LENGTH_SHORT).show()
+            } else {
+                txtError.text = "Sai tên đăng nhập hoặc mật khẩu"
+            }
+        })
     }
 
     override fun initData() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun initListener() {
-        btnLogin.setOnClickListener {
-            var phone = edtPhone.text.toString().trim();
-            if (ValidatePhone().validate(phone)){
-                Toast.makeText(requireContext(), "OK", Toast.LENGTH_SHORT).show();
+        btnLogin1.setOnClickListener {
+            val phone = edtPhone.text.toString().trim()
+            val password = edtPass.text.toString().trim()
+            txtError.text = ""
+            if (!ValidatePassword.validate(password)){
+                Toast.makeText(requireContext(), Define.ToastMessage.SIGNIN_PASSWORD_INVALID, Toast.LENGTH_SHORT).show()
+                edtPhone.setText("")
+                edtPass.setText("")
+            } else if (!ValidatePhone.validate(phone)){
+                Toast.makeText(requireContext(), Define.ToastMessage.SIGNIN_PHONE_INVALID, Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(requireContext(), "Not OK", Toast.LENGTH_SHORT).show();
+                val encodedString = "Basic " + Base64Utils.encode("$phone:$password")
+                viewModel.login(encodedString)
             }
+        }
+        btnRegister1.setOnClickListener{
+            getVC().addFragment(RegisterFragment::class.java)
         }
     }
 
     override fun backPressed(): Boolean {
-        return false;
+        getVC().removeAllFragment()
+        return true
     }
 
-    private val viewModel: LoginViewModel by viewModels();
+    private val viewModel: LoginViewModel by viewModels()
 }

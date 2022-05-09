@@ -2,6 +2,7 @@ package com.base.mvvmbasekotlin.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.tencent.mmkv.MMKV
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -22,6 +23,7 @@ abstract class BaseActivity : AppCompatActivity() {
         initView()
         initData()
         initListener()
+        MMKV.initialize(this);
     }
 
     override fun onBackPressed() {
