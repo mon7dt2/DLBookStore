@@ -1,18 +1,21 @@
 package com.base.mvvmbasekotlin.ui.login
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import com.base.mvvmbasekotlin.base.BaseViewModel
 import com.base.mvvmbasekotlin.network.Repository
-import com.tencent.mmkv.MMKV
+import com.base.mvvmbasekotlin.utils.Base64Utils
+import com.base.mvvmbasekotlin.utils.MMKVHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(private var repo: Repository) : BaseViewModel(){
 
-    var kv = MMKV.defaultMMKV()!!
     private val response = MutableLiveData<String>()
+
     fun getResponse() : MutableLiveData<String>{
         return response
     }
@@ -24,20 +27,35 @@ class LoginViewModel @Inject constructor(private var repo: Repository) : BaseVie
             }.doFinally {
                 loading.postValue(false)
             }.subscribe({
-                Log.d("myLog", it.toString())
                 response.postValue("HTTP OK")
             }, {
-                it.message?.let { it1 -> Log.d("myLog", it1) }
                 response.postValue(it.message)
             })
         )
     }
 
     fun saveLoginSession(encodedString: String){
-        kv.encode("jwt", encodedString)
+        MMKVHelper.getInstance().encode("jwt", encodedString)
     }
 
     fun checkLoginSession() : Boolean{
-        return !kv.decodeString("jwt").equals("")
+        return !MMKVHelper.getInstance().decodeString("jwt").equals("")
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getLoginSession(): List<String>? {
+
+        return if (checkLoginSession()) {
+            val string = MMKVHelper.getInstance().decodeString("jwt", "")
+            val jwt1 = string?.split(" ")
+            val jwt = Base64Utils.decode(jwt1?.get(1))
+            jwt?.split(":")
+        } else {
+            null
+        }
+    }
+
+    fun removeLoginSession(){
+        MMKVHelper.getInstance().removeValueForKey("jwt")
     }
 }

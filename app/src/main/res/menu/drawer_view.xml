@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_dashboard"
+            android:title="@string/dashboard" />
+        <item android:title="@string/itemMenuGeneral">
+            <menu>
+                <group android:checkableBehavior="single"
+                    android:id="@+id/groupGeneral">
+                    <item
+                        android:id="@+id/nav_category"
+                        android:icon="@drawable/ic_category"
+                        android:title="@string/category" />
+                    <item
+                        android:id="@+id/nav_product"
+                        android:icon="@drawable/ic_product"
+                        android:title="@string/product" />
+                    <item
+                        android:id="@+id/nav_order"
+                        android:icon="@drawable/ic_order"
+                        android:title="@string/orders" />
+                    <item
+                        android:id="@+id/nav_coupon"
+                        android:icon="@drawable/ic_coupon"
+                        android:title="@string/coupon" />
+                </group>
+            </menu>
+        </item>
+
+        <item android:title="@string/itemMenuPerson">
+            <menu>
+                <group android:checkableBehavior="single"
+                    android:id="@+id/groupPerson">
+                    <item
+                        android:id="@+id/nav_customer"
+                        android:icon="@drawable/ic_customer"
+                        android:title="@string/customers" />
+                    <item
+                        android:id="@+id/nav_provider"
+                        android:icon="@drawable/ic_provider"
+                        android:title="@string/providers" />
+                    <item
+                        android:id="@+id/nav_staff"
+                        android:icon="@drawable/ic_staff"
+                        android:title="@string/staff" />
+                </group>
+            </menu>
+        </item>
+</menu>

@@ -58,12 +58,8 @@ abstract class BaseFragment : Fragment() {
 
     }
 
-//    protected fun showLoadingDialog(){
-//        loadingDialog.show()
-//    }
-//
-//    protected fun hideLoadingDilog(){
-//        loadingDialog.hide()
-//    }
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        loadingDialog.dismiss()
+    }
 }

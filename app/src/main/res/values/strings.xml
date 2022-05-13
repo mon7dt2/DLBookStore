@@ -8,6 +8,26 @@
     <string name="forgotPassword">Quên mật khẩu?</string>
     <string name="phone">Số điện thoại</string>
     <string name="name">Họ và tên</string>
+    <string name="email">Email</string>
+    <string name="invalidInput">Vui lòng nhập đầy đủ thông tin</string>
+    <string name="wrongInput">Sai tên đăng nhập hoặc mật khẩu</string>
+    <string name="invalidPass">Mật khẩu không hợp lệ</string>
+    <string name="invalidPhone">Số điện thoại không hợp lệ</string>
+    <string name="invalidEmail">Email không hợp lệ</string>
+    <string name="passNotMatch">Mật khẩu không trùng nhau</string>
+    <string name="dateHint">Ngày sinh</string>
+    <string name="dashboard">Trang chủ</string>
+    <string name="category">Danh mục</string>
+    <string name="product">Sản phẩm</string>
+    <string name="customers">Khách hàng</string>
+    <string name="orders">Hóa đơn</string>
+    <string name="coupon">Khuyến mãi</string>
+    <string name="providers">Nhà cung cấp</string>
+    <string name="staff">Nhân viên</string>
+    <string name="drawer_open">drawer opening...</string>
+    <string name="drawer_close">drawer closing...</string>
+    <string name="itemMenuGeneral">Sản phẩm</string>
+    <string name="itemMenuPerson">Thành viên</string>
     <integer name="activity_anim_duration">300</integer>
     <integer name="activity_anim_duration_out">500</integer>
 </resources>

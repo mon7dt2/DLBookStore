@@ -40,6 +40,8 @@ open class Define {
             val SIGNIN_PHONE_INVALID = "Số điện thoại không hợp lệ"
             val SIGNIN_PASSWORD_INVALID = "Mật khẩu không hợp lệ"
             val SIGNIN_INVALID = "Tên tài khoản mặt mật khẩu không đúng"
+            val REGISTER_SUCCESS = "Đăng ký tài khoản thành công"
+            val REGISTER_STAFF_SUCCESS = "Đăng ký tài khoản thành công, Hãy chờ quản trị viên duyệt"
         }
     }
 

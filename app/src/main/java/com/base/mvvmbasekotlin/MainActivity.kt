@@ -7,7 +7,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
-
     override val layoutResId: Int
         get() = R.layout.activity_main
     override val layoutId: Int
@@ -18,7 +17,6 @@ class MainActivity : BaseActivity() {
 
     override fun initView() {
         getViewController().addFragment(SplashFragment::class.java);
-
     }
 
     override fun initData() {

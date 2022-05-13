@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import com.base.mvvmbasekotlin.R
 import com.base.mvvmbasekotlin.base.BaseFragment
+import com.base.mvvmbasekotlin.ui.dashboard.DashboardFragment
 import com.base.mvvmbasekotlin.ui.register.RegisterFragment
 import com.base.mvvmbasekotlin.utils.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -13,8 +14,15 @@ import kotlinx.android.synthetic.main.login_fragment.*
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment() {
-
+    private lateinit var encodedString : String
     override fun backFromAddFragment() {
+        val phoneRegister = arguments?.getString("phoneRegister", "")
+        val passRegister = arguments?.getString("passRegister", "")
+
+        if(phoneRegister != "" && passRegister != ""){
+            edtPhone.setText(phoneRegister)
+            edtPass.setText(passRegister)
+        }
     }
 
     override val layoutId: Int
@@ -22,6 +30,7 @@ class LoginFragment : BaseFragment() {
 
     override fun initView() {
         EditTextUtils.setEditText(edtPhone, imgClearPhone)
+
         viewModel.loading.observe(this, { isLoading: Boolean? ->
             if (isLoading != null) {
                 if (isLoading) {
@@ -33,15 +42,31 @@ class LoginFragment : BaseFragment() {
         })
         viewModel.getResponse().observe(requireActivity(), { response : String? ->
             if(response.equals("HTTP OK")){
-                Toast.makeText(requireContext(), "OK", Toast.LENGTH_SHORT).show()
+                if(checkBoxRememberLogin.isChecked){
+                    viewModel.saveLoginSession(encodedString)
+                } else {
+                    viewModel.removeLoginSession()
+                }
+                getVC().addFragment(DashboardFragment::class.java)
             } else {
-                txtError.text = "Sai tên đăng nhập hoặc mật khẩu"
+                txtError.text = Define.ToastMessage.SIGNIN_INVALID
             }
         })
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun initData() {
 
+        if(viewModel.checkLoginSession()){
+            val jwt = viewModel.getLoginSession()
+            if(jwt != null){
+                edtPhone.setText(jwt[0])
+                edtPass.setText(jwt[1])
+                checkBoxRememberLogin.isChecked = true
+            } else {
+                checkBoxRememberLogin.isChecked = false
+            }
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -57,7 +82,7 @@ class LoginFragment : BaseFragment() {
             } else if (!ValidatePhone.validate(phone)){
                 Toast.makeText(requireContext(), Define.ToastMessage.SIGNIN_PHONE_INVALID, Toast.LENGTH_SHORT).show()
             } else {
-                val encodedString = "Basic " + Base64Utils.encode("$phone:$password")
+                encodedString = "Basic " + Base64Utils.encode("$phone:$password")
                 viewModel.login(encodedString)
             }
         }
