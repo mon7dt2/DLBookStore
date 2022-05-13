@@ -1,11 +1,9 @@
 package com.base.mvvmbasekotlin.ui.dashboard
 
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import com.base.mvvmbasekotlin.R
 import com.base.mvvmbasekotlin.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,17 +29,8 @@ class DashboardFragment: BaseFragment() {
             toolbar,
             R.string.drawer_open,
             R.string.drawer_close
-        ){
-            override fun onDrawerClosed(view: View){
-                super.onDrawerClosed(view)
-                //toast("Drawer closed")
-            }
-
-            override fun onDrawerOpened(drawerView: View){
-                super.onDrawerOpened(drawerView)
-                //toast("Drawer opened")
-            }
-        }
+        ){}
+        drawerToggle.setHomeAsUpIndicator(R.drawable.ic_menu)
         drawerToggle.isDrawerIndicatorEnabled = true
         drawer_layout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
