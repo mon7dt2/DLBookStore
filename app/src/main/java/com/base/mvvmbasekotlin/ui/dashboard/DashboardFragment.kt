@@ -6,11 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.base.mvvmbasekotlin.R
 import com.base.mvvmbasekotlin.base.BaseFragment
+import com.base.mvvmbasekotlin.base.ViewController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 @AndroidEntryPoint
 class DashboardFragment: BaseFragment() {
+
+    private var viewControllerDashboard = ViewController(R.id.containerDashboard, requireActivity().supportFragmentManager)
     override fun backFromAddFragment() {
 
     }
@@ -42,9 +45,13 @@ class DashboardFragment: BaseFragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == android.R.id.home) {
-            drawer_layout.openDrawer(GravityCompat.START)
-            return true
+        when(item.itemId) {
+            android.R.id.home -> {
+                drawer_layout.openDrawer(GravityCompat.START)
+            }
+            R.id.nav_category -> {
+
+            }
         }
         return super.onOptionsItemSelected(item)
     }

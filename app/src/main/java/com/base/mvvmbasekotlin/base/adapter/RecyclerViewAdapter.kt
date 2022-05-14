@@ -18,7 +18,7 @@ abstract class RecyclerViewAdapter(var context: Context?, enableSelectedMode: Bo
     private var listWrapperModels: ArrayList<ModelWrapper>? = null
     private var listWrapperModelsBackup: ArrayList<ModelWrapper>? = null
 
-    val inflater: LayoutInflater
+    val inflater: LayoutInflater = LayoutInflater.from(context)
     private val onItemClickListeners: ArrayList<OnItemClickListener>
     private var onItemTouchChangeListener: OnItemTouchChangedListener? = null
     private var onItemSelectionChangeListener: OnItemSelectionChangedListener? = null
@@ -28,7 +28,6 @@ abstract class RecyclerViewAdapter(var context: Context?, enableSelectedMode: Bo
         private set
 
     init {
-        this.inflater = LayoutInflater.from(context)
         this.listWrapperModels = ArrayList()
         this.onItemClickListeners = ArrayList(1)
 
@@ -117,7 +116,7 @@ abstract class RecyclerViewAdapter(var context: Context?, enableSelectedMode: Bo
         val startInsertedPosition = itemCount
         val endInsertedPosition = startInsertedPosition + listModels.size
         for (i in fromIndex..toIndex) {
-            addModel(listModels[i], viewType, false, false)
+            addModel(listModels[i], viewType, isScroll = false, isUpdate = false)
         }
         notifyItemRangeInserted(startInsertedPosition, endInsertedPosition)
         if (isScroll) {

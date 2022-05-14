@@ -2,6 +2,8 @@ package com.base.mvvmbasekotlin.network
 
 import com.base.mvvmbasekotlin.models.request.StaffRegisterRequest
 import com.base.mvvmbasekotlin.models.response.AuthResponse
+import com.base.mvvmbasekotlin.models.data.CategoryPreview
+import com.base.mvvmbasekotlin.models.response.CategoryPreviewResponse
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -17,6 +19,12 @@ class Repository @Inject constructor(private val apiInterface: ApiInterface) {
 
     fun staffRegister(encodedString: String, body: StaffRegisterRequest): Single<AuthResponse> {
         return apiInterface.staffRegister(encodedString, body)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getAllCategories(): Single<CategoryPreviewResponse> {
+        return apiInterface.getAllCategories()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
