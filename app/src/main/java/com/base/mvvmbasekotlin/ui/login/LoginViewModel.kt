@@ -39,17 +39,20 @@ class LoginViewModel @Inject constructor(private var repo: Repository) : BaseVie
     }
 
     fun checkLoginSession() : Boolean{
-        return !MMKVHelper.getInstance().decodeString("jwt").equals("")
+        return MMKVHelper.getInstance().decodeString("jwt") != null || !MMKVHelper.getInstance().decodeString("jwt").equals("")
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun getLoginSession(): List<String>? {
-
         return if (checkLoginSession()) {
             val string = MMKVHelper.getInstance().decodeString("jwt", "")
-            val jwt1 = string?.split(" ")
-            val jwt = Base64Utils.decode(jwt1?.get(1))
-            jwt?.split(":")
+            if(string != null && string != ""){
+                val jwt1 = string.split(" ")
+                val jwt = Base64Utils.decode(jwt1[1])!!
+                jwt.split(":")
+            } else {
+                null
+            }
         } else {
             null
         }

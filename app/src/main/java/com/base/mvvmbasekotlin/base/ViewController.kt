@@ -11,10 +11,8 @@ class ViewController(
     private val fragmentManager: FragmentManager
 ) {
 
-
     private val listFragment: ArrayList<BaseFragment> = arrayListOf()
     var currentFragment: BaseFragment? = null
-        private set
 
     fun <T : BaseFragment> replaceFragment(type: Class<T>, data: Bundle? = null) {
         try {
@@ -36,7 +34,6 @@ class ViewController(
             listFragment.clear()
             listFragment.add(it)
         }
-
     }
 
     fun <T : BaseFragment>addFragment(
@@ -61,9 +58,9 @@ class ViewController(
             newFragment = type.newInstance()
 
         } catch (e: InstantiationException) {
-            println("Error add fragment")
+            println("Error add fragment1")
         } catch (e: IllegalAccessException) {
-            println("Error add fragment")
+            println("Error add fragment2")
         }
         if (newFragment != null && data != null) {
             newFragment.arguments = (data)

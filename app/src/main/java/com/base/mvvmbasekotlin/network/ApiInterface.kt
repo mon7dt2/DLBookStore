@@ -6,7 +6,6 @@ import com.base.mvvmbasekotlin.models.response.CategoryPreviewResponse
 import io.reactivex.Single
 import retrofit2.http.*
 
-
 interface ApiInterface {
 
     @POST("/api/auths/staff/login/")

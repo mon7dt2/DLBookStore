@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
+import com.base.mvvmbasekotlin.BaseApplication.Companion.context
 import com.base.mvvmbasekotlin.R
 import com.base.mvvmbasekotlin.base.BaseFragment
 import com.base.mvvmbasekotlin.extension.hideKeyboard
@@ -17,9 +18,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.login_fragment.imgClearPhone
 import kotlinx.android.synthetic.main.register_fragment.*
 
-
 @AndroidEntryPoint
-class RegisterFragment: BaseFragment() {
+class RegisterFragment: BaseFragment(context) {
     override fun backFromAddFragment() {
     }
 

@@ -10,8 +10,10 @@ import com.base.mvvmbasekotlin.R
 import com.base.mvvmbasekotlin.base.adapter.RecyclerViewAdapter
 import com.base.mvvmbasekotlin.models.data.Category
 import com.bumptech.glide.Glide
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class GenderSpinnerAdapter(mContext: Context): RecyclerViewAdapter(mContext, true) {
+class CategoryAdapter(mContext: Context): RecyclerViewAdapter(mContext, true) {
 
     override fun initNormalViewHolder(parent: ViewGroup): RecyclerView.ViewHolder? {
         return CategoryViewHolder(parent.rootView)

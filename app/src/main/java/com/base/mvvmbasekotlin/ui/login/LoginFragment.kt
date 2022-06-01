@@ -4,6 +4,7 @@ import android.os.Build
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
+import com.base.mvvmbasekotlin.BaseApplication.Companion.context
 import com.base.mvvmbasekotlin.R
 import com.base.mvvmbasekotlin.base.BaseFragment
 import com.base.mvvmbasekotlin.ui.dashboard.DashboardFragment
@@ -13,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.login_fragment.*
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment() {
+class LoginFragment : BaseFragment(context) {
     private lateinit var encodedString : String
     override fun backFromAddFragment() {
         val phoneRegister = arguments?.getString("phoneRegister", "")

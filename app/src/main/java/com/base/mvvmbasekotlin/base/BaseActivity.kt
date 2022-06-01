@@ -2,6 +2,7 @@ package com.base.mvvmbasekotlin.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.base.mvvmbasekotlin.R
 import com.tencent.mmkv.MMKV
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -23,8 +24,9 @@ abstract class BaseActivity : AppCompatActivity() {
         initView()
         initData()
         initListener()
-        MMKV.initialize(this);
+        MMKV.initialize(this)
     }
+
 
     override fun onBackPressed() {
         if(viewController!= null && viewController?.currentFragment!=null){

@@ -4,18 +4,18 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.viewModels
+import com.base.mvvmbasekotlin.BaseApplication.Companion.context
 import com.base.mvvmbasekotlin.R
 import com.base.mvvmbasekotlin.base.BaseFragment
 import com.base.mvvmbasekotlin.base.ViewController
+import com.base.mvvmbasekotlin.ui.category.CategoryFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 @AndroidEntryPoint
-class DashboardFragment: BaseFragment() {
-
-    private var viewControllerDashboard = ViewController(R.id.containerDashboard, requireActivity().supportFragmentManager)
+class DashboardFragment: BaseFragment(context){
     override fun backFromAddFragment() {
-
     }
 
     override val layoutId: Int
@@ -39,6 +39,11 @@ class DashboardFragment: BaseFragment() {
         drawerToggle.syncState()
         nav_view.setNavigationItemSelectedListener {
             it.isChecked = true
+            when (it.itemId){
+                R.id.nav_category -> {
+                    replaceFragment(CategoryFragment(), R.id.containerDashboard, animation = false)
+                }
+            }
             drawer_layout.closeDrawers()
             true
         }
@@ -48,9 +53,6 @@ class DashboardFragment: BaseFragment() {
         when(item.itemId) {
             android.R.id.home -> {
                 drawer_layout.openDrawer(GravityCompat.START)
-            }
-            R.id.nav_category -> {
-
             }
         }
         return super.onOptionsItemSelected(item)
@@ -67,4 +69,6 @@ class DashboardFragment: BaseFragment() {
     override fun backPressed(): Boolean {
         return false
     }
+
+    private val viewModel: DashboardViewModel by viewModels()
 }

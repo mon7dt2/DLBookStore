@@ -1,6 +1,7 @@
 package com.base.mvvmbasekotlin.ui.splash
 
 import androidx.fragment.app.viewModels
+import com.base.mvvmbasekotlin.BaseApplication.Companion.context
 import com.base.mvvmbasekotlin.R
 import com.base.mvvmbasekotlin.base.BaseFragment
 import com.base.mvvmbasekotlin.base.permission.PermissionHelper
@@ -8,7 +9,7 @@ import com.base.mvvmbasekotlin.ui.login.LoginFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SplashFragment : BaseFragment() {
+class SplashFragment : BaseFragment(context) {
 
     private val permissionHelper: PermissionHelper by lazy {
         PermissionHelper()
