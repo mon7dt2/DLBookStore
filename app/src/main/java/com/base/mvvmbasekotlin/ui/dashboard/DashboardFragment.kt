@@ -25,7 +25,6 @@ class DashboardFragment: BaseFragment(context){
         (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
         val actionbar = (requireActivity() as AppCompatActivity).supportActionBar
         actionbar?.setDisplayHomeAsUpEnabled(true)
-        actionbar?.setHomeAsUpIndicator(R.drawable.ic_menu)
         val drawerToggle: ActionBarDrawerToggle = object : ActionBarDrawerToggle(
             requireActivity(),
             drawer_layout,
@@ -41,6 +40,7 @@ class DashboardFragment: BaseFragment(context){
             it.isChecked = true
             when (it.itemId){
                 R.id.nav_category -> {
+                    actionbar?.title = "Danh mục"
                     replaceFragment(CategoryFragment(), R.id.containerDashboard, animation = false)
                 }
             }

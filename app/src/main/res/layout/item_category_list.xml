@@ -22,4 +22,22 @@
         android:textStyle="bold"
         android:textColor="@color/colorPrimary" />
 
+    <ImageView
+        android:id="@+id/iconEditCategory"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_toLeftOf="@+id/iconRemoveCategory"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_edit_gray"
+        android:layout_marginEnd="10dp"/>
+
+    <ImageView
+        android:id="@+id/iconRemoveCategory"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_trash_gray"
+        android:layout_marginEnd="10dp"/>
+
 </RelativeLayout>

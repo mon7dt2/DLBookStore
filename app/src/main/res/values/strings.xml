@@ -28,6 +28,9 @@
     <string name="drawer_close">drawer closing...</string>
     <string name="itemMenuGeneral">Sản phẩm</string>
     <string name="itemMenuPerson">Thành viên</string>
+    <string name="save">Lưu</string>
+    <string name="categoryDetail">Chi tiết danh mục</string>
+    <string name="addCategory">Thêm danh mục</string>
     <integer name="activity_anim_duration">300</integer>
     <integer name="activity_anim_duration_out">500</integer>
 </resources>
