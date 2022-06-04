@@ -8,9 +8,9 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/providerList"
+        android:id="@+id/productList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_provider_list" />
+        tools:listitem="@layout/item_product_list" />
 </LinearLayout>

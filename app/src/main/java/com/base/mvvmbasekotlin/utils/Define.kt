@@ -39,6 +39,7 @@ open class Define {
     open class ToastMessage {
         companion object {
             val SIGNIN_PHONE_INVALID = "Số điện thoại không hợp lệ"
+            val EMAIL_INVALID = "Địa chỉ email không hợp lệ"
             val SIGNIN_PASSWORD_INVALID = "Mật khẩu không hợp lệ"
             val SIGNIN_INVALID = "Tên tài khoản mặt mật khẩu không đúng"
             val INPUT_SUCCESS = "Thao tác thành công"

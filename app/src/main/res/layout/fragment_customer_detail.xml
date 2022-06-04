@@ -4,12 +4,22 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarCustomer"
+        android:layout_width="match_parent"
+        app:title="@string/customerDetail"
+        app:titleTextColor="@color/white"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ToolbarColoredBackArrow" />
+
     <ImageView
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:src="@drawable/ic_staff"
         android:background="#c1c1c1"
         android:id="@+id/imgCustomer"
+        android:layout_below="@+id/toolbarCustomer"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
 

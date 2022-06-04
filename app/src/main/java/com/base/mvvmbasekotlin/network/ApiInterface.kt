@@ -1,5 +1,6 @@
 package com.base.mvvmbasekotlin.network
 
+import com.base.mvvmbasekotlin.models.request.ProviderBodyRequest
 import com.base.mvvmbasekotlin.models.request.StaffRegisterRequest
 import com.base.mvvmbasekotlin.models.response.*
 import io.reactivex.Single
@@ -42,6 +43,24 @@ interface ApiInterface {
     fun deleteCategory(@Header("Authorization") encodedString : String,
                        @Path("categoryId")id: Long): Single<OkResponse>
 
-    @GET("/api/admins/customer")
+    @GET("/api/admin/customer")
     fun getAllCustomer(@Header("Authorization") encodedString : String): Single<CustomerResponse>
+
+    @GET("/api/provider")
+    fun getAllProvider(@Header("Authorization") encodedString : String): Single<ProviderResponse>
+
+    @POST("/api/provider")
+    fun addProvider(@Header("Authorization") encodedString : String,
+                    @Body body: ProviderBodyRequest): Single<SingleProviderResponse>
+    @PATCH("api/provider/{providerId}")
+    fun updateProvider(@Header("Authorization") encodedString : String,
+                    @Path("providerId") id: Int,
+                     @Body body: ProviderBodyRequest): Single<UpdateOkResponse>
+    @DELETE("api/provider/{providerId}")
+    fun deleteProvider(@Header("Authorization") encodedString : String,
+                     @Path("providerId") id: Int): Single<UpdateOkResponse>
+
+    @GET("api/products")
+    fun getAllProducts(): Single<ProductListResponse>
+
 }

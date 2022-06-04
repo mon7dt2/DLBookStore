@@ -1,126 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/ic_staff"
-        android:background="#c1c1c1"
-        android:id="@+id/imgProvider"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
-
-    <com.google.android.material.textfield.TextInputLayout
+    android:fillViewport="true">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imgProvider"
-        android:id="@+id/layoutEdtPrvName"
-        android:layout_marginTop="10dp"
-        android:paddingTop="10dp"
-        app:hintAnimationEnabled="true"
-        app:hintTextColor="@color/colorPrimary"
-        app:hintEnabled="true">
-        <EditText
+        android:layout_height="fill_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarProvider"
+            android:layout_width="match_parent"
+            app:title="@string/providerDetail"
+            app:titleTextColor="@color/white"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ToolbarColoredBackArrow" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbarProvider"
+            android:id="@+id/layoutEdtPrvName"
+            android:layout_marginTop="10dp"
+            android:paddingTop="10dp"
+            app:hintAnimationEnabled="true"
+            app:hintTextColor="@color/colorPrimary"
+            app:hintEnabled="true">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/edtPrvName"
+                android:background="@drawable/bg_edt_outline"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:maxLines="1"
+                android:hint="Tên nhà cung cấp"
+                android:drawablePadding="10dp"
+                android:inputType="text"
+                android:paddingStart="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutEdtPrvName"
+            android:id="@+id/layoutEdtPrvPhone"
+            android:layout_marginTop="10dp"
+            android:paddingTop="10dp"
+            app:hintAnimationEnabled="true"
+            app:hintTextColor="@color/colorPrimary"
+            app:hintEnabled="true">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/edtPrvPhone"
+                android:background="@drawable/bg_edt_outline"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:maxLines="1"
+                android:hint="Số điện thoại"
+                android:drawablePadding="10dp"
+                android:inputType="text"
+                android:paddingStart="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutEdtPrvPhone"
+            android:id="@+id/layoutEdtPrvEmail"
+            android:layout_marginTop="10dp"
+            android:paddingTop="10dp"
+            app:hintAnimationEnabled="true"
+            app:hintTextColor="@color/colorPrimary"
+            app:hintEnabled="true">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/edtPrvEmail"
+                android:background="@drawable/bg_edt_outline"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:maxLines="1"
+                android:hint="Email"
+                android:drawablePadding="10dp"
+                android:inputType="text"
+                android:paddingStart="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutEdtPrvEmail"
+            android:id="@+id/layoutEdtPrvAddress"
+            android:layout_marginTop="10dp"
+            android:paddingTop="10dp"
+            app:hintAnimationEnabled="true"
+            app:hintTextColor="@color/colorPrimary"
+            app:hintEnabled="true">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/edtPrvAddress"
+                android:background="@drawable/bg_edt_outline"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:maxLines="1"
+                android:hint="Địa chỉ"
+                android:drawablePadding="10dp"
+                android:inputType="text"
+                android:paddingStart="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutEdtPrvAddress"
+            android:id="@+id/layoutEdtPrvDescription"
+            android:layout_marginTop="10dp"
+            android:paddingTop="10dp"
+            app:hintAnimationEnabled="true"
+            app:hintTextColor="@color/colorPrimary"
+            app:hintEnabled="true">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/edtPrvDescription"
+                android:background="@drawable/bg_edt_outline"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:maxLines="1"
+                android:hint="Mô tả thêm"
+                android:drawablePadding="10dp"
+                android:inputType="text"
+                android:paddingStart="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/edtPrvName"
-            android:background="@drawable/bg_edt_outline"
+            android:id="@+id/btnSendProviderData"
+            android:background="@drawable/bg_btn_accent"
+            android:text="@string/save"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textSize="18sp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:maxLines="1"
-            android:hint="Họ và tên"
-            android:drawablePadding="10dp"
-            android:inputType="text"
-            android:paddingStart="10dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginBottom="20dp"
+            android:layout_below="@+id/layoutEdtPrvDescription"
+            android:layout_marginTop="30dp"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layoutEdtPrvName"
-        android:id="@+id/layoutEdtPrvPhone"
-        android:layout_marginTop="10dp"
-        android:paddingTop="10dp"
-        app:hintAnimationEnabled="true"
-        app:hintTextColor="@color/colorPrimary"
-        app:hintEnabled="true">
-        <EditText
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/edtPrvPhone"
-            android:background="@drawable/bg_edt_outline"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:maxLines="1"
-            android:hint="Số điện thoại"
-            android:drawablePadding="10dp"
-            android:inputType="text"
-            android:paddingStart="10dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layoutEdtPrvPhone"
-        android:id="@+id/layoutEdtPrvEmail"
-        android:layout_marginTop="10dp"
-        android:paddingTop="10dp"
-        app:hintAnimationEnabled="true"
-        app:hintTextColor="@color/colorPrimary"
-        app:hintEnabled="true">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/edtPrvEmail"
-            android:background="@drawable/bg_edt_outline"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:maxLines="1"
-            android:hint="Email"
-            android:drawablePadding="10dp"
-            android:inputType="text"
-            android:paddingStart="10dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layoutEdtPrvEmail"
-        android:id="@+id/layoutEdtCtmAddress"
-        android:layout_marginTop="10dp"
-        android:paddingTop="10dp"
-        app:hintAnimationEnabled="true"
-        app:hintTextColor="@color/colorPrimary"
-        app:hintEnabled="true">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/edtPrvAddress"
-            android:background="@drawable/bg_edt_outline"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:maxLines="1"
-            android:hint="Địa chỉ"
-            android:drawablePadding="10dp"
-            android:inputType="text"
-            android:paddingStart="10dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/btnSendCategoryData"
-        android:background="@drawable/bg_btn_accent"
-        android:text="@string/save"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_alignParentBottom="true"/>
-
-</RelativeLayout>
+            android:id="@+id/txtDeleteProvider"
+            android:layout_below="@+id/btnSendProviderData"
+            android:layout_marginTop="5dp"
+            android:text="@string/delete"
+            android:textColor="@color/red"
+            android:textSize="18sp"
+            android:gravity="center" />
+    </RelativeLayout>
+</ScrollView>

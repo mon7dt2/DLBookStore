@@ -1,5 +1,6 @@
 package com.base.mvvmbasekotlin.network
 
+import com.base.mvvmbasekotlin.models.request.ProviderBodyRequest
 import com.base.mvvmbasekotlin.models.request.StaffRegisterRequest
 import com.base.mvvmbasekotlin.models.response.*
 import io.reactivex.Single
@@ -48,6 +49,38 @@ class Repository @Inject constructor(private val apiInterface: ApiInterface) {
 
     fun getAllCustomer(encodedString: String): Single<CustomerResponse>{
         return apiInterface.getAllCustomer(encodedString)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getAllProvider(encodedString: String): Single<ProviderResponse>{
+        return apiInterface.getAllProvider(encodedString)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun addProvider(encodedString: String,
+                    body: ProviderBodyRequest): Single<SingleProviderResponse>{
+        return apiInterface.addProvider(encodedString, body)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun updateProvider(encodedString: String, id: Int,
+                    body: ProviderBodyRequest): Single<UpdateOkResponse>{
+        return apiInterface.updateProvider(encodedString, id, body)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun deleteProvider(encodedString: String, id: Int): Single<UpdateOkResponse>{
+        return apiInterface.deleteProvider(encodedString, id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getAllProducts(): Single<ProductListResponse> {
+        return apiInterface.getAllProducts()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

@@ -1,5 +1,7 @@
 package com.base.mvvmbasekotlin.ui.customer.detail
 
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import com.base.mvvmbasekotlin.BaseApplication.Companion.context
 import com.base.mvvmbasekotlin.R
@@ -21,6 +23,8 @@ class CustomerDetailFragment: BaseFragment(context) {
         get() = R.layout.fragment_customer_detail
 
     override fun initView() {
+        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbarCustomer)
+        val actionbar = (requireActivity() as AppCompatActivity).supportActionBar
         val r = Random()
         val token: Int = r.nextInt()
 
@@ -49,7 +53,9 @@ class CustomerDetailFragment: BaseFragment(context) {
     }
 
     override fun backPressed(): Boolean {
-        getVC().backFromAddFragment()
+        val bundle = Bundle()
+        bundle.putString("lastestFragment", "Customer")
+        getVC().backFromAddFragment(bundle)
         return false
     }
 

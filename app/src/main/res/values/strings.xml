@@ -35,6 +35,9 @@
     <string name="reject">Hủy</string>
     <string name="deleteCategory">Xóa danh mục</string>
     <string name="confirmDeleteCate">Bạn có chắc muốn xóa danh mục này không?</string>
+    <string name="customerDetail">Chi tiết khách hàng</string>
+    <string name="providerDetail">Chi tiết nhà cung cấp</string>
+    <string name="delete">xóa</string>
     <integer name="activity_anim_duration">300</integer>
     <integer name="activity_anim_duration_out">500</integer>
 </resources>

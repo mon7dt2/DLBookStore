@@ -16,6 +16,7 @@ import androidx.fragment.app.viewModels
 import com.base.mvvmbasekotlin.BaseApplication.Companion.context
 import com.base.mvvmbasekotlin.R
 import com.base.mvvmbasekotlin.base.BaseFragment
+import com.base.mvvmbasekotlin.extension.hideKeyboard
 import com.base.mvvmbasekotlin.utils.Define
 import com.base.mvvmbasekotlin.utils.FileUtil
 import com.base.mvvmbasekotlin.utils.MMKVHelper
@@ -50,7 +51,7 @@ class CategoryDetailFragment: BaseFragment(context) {
         val actionbar = (requireActivity() as AppCompatActivity).supportActionBar
         actionbar?.setDisplayHomeAsUpEnabled(true)
         setMenuVisibility(false)
-        if(arguments?.getInt("categoryId", 0) == 0){
+        if(arguments?.getInt("categoryId") == null) {
             actionbar?.title = getString(R.string.addCategory)
             imgCategoryDetail.setImageResource(R.drawable.add_image)
             edtCateName.setText("")
@@ -89,6 +90,7 @@ class CategoryDetailFragment: BaseFragment(context) {
         }
 
         btnSendCategoryData.setOnClickListener{
+            edtCateName.hideKeyboard()
             if(!isHaveBaseCover){
                 if( !isUpdateCover || edtCateName.text == null){
                     Toast.makeText(requireContext(),Define.ToastMessage.INVALID_INPUT, Toast.LENGTH_SHORT).show()
@@ -110,7 +112,9 @@ class CategoryDetailFragment: BaseFragment(context) {
         viewModel.getResponse().observe(viewLifecycleOwner, {
             if(it == "Ok"){
                 Toast.makeText(requireContext(),Define.ToastMessage.INPUT_SUCCESS, Toast.LENGTH_SHORT).show()
-                getVC().backFromAddFragment()
+                val bundle = Bundle()
+                bundle.putString("lastestFragment", "Category")
+                getVC().backFromAddFragment(bundle)
             } else if(it == "HTTP 409"){
                 Toast.makeText(requireContext(),Define.ToastMessage.CATEGORY_EXIST, Toast.LENGTH_SHORT).show()
             } else {

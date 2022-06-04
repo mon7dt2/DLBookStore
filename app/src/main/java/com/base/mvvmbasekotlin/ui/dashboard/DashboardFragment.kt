@@ -14,6 +14,8 @@ import com.base.mvvmbasekotlin.base.ViewController
 import com.base.mvvmbasekotlin.ui.category.CategoryFragment
 import com.base.mvvmbasekotlin.ui.customer.CustomerFragment
 import com.base.mvvmbasekotlin.ui.dashboard.detail.DashboardDetailFragment
+import com.base.mvvmbasekotlin.ui.product.ProductFragment
+import com.base.mvvmbasekotlin.ui.provider.ProviderFragment
 import com.base.mvvmbasekotlin.utils.MMKVHelper
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -29,6 +31,15 @@ class DashboardFragment: BaseFragment(context){
             when(state){
                 "Category" -> {
                     replaceFragment(CategoryFragment(), R.id.containerDashboard, animation = false)
+                }
+                "Provider" -> {
+                    replaceFragment(ProviderFragment(), R.id.containerDashboard, animation = false)
+                }
+                "Customer" -> {
+                    replaceFragment(CustomerFragment(), R.id.containerDashboard, animation = false)
+                }
+                "Product" -> {
+                    replaceFragment(ProductFragment(), R.id.containerDashboard, animation = false)
                 }
             }
         }
@@ -68,6 +79,14 @@ class DashboardFragment: BaseFragment(context){
                 R.id.nav_customer -> {
                     actionbar?.title = "Khách hàng"
                     replaceFragment(CustomerFragment(), R.id.containerDashboard, animation = false)
+                }
+                R.id.nav_provider -> {
+                    actionbar?.title = "Nhà cung cấp"
+                    replaceFragment(ProviderFragment(), R.id.containerDashboard, animation = false)
+                }
+                R.id.nav_product -> {
+                    actionbar?.title = "Sản phẩm"
+                    replaceFragment(ProductFragment(), R.id.containerDashboard, animation = false)
                 }
             }
             drawer_layout.closeDrawers()
