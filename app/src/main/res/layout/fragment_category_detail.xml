@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:id="@+id/edtCateName"
-            android:background="@drawable/bg_edt1"
+            android:background="@drawable/bg_edt_outline"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:maxLines="1"

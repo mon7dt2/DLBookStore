@@ -4,7 +4,10 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Bundle
 import android.provider.MediaStore
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +21,8 @@ import com.base.mvvmbasekotlin.utils.FileUtil
 import com.base.mvvmbasekotlin.utils.MMKVHelper
 import com.base.mvvmbasekotlin.utils.RealPathUtil
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_category_detail.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -31,6 +36,7 @@ import java.util.*
 class CategoryDetailFragment: BaseFragment(context) {
     val REQUEST_CODE_IMAGE_STORAGE = 12111
     var isUpdateCover = false
+    var isHaveBaseCover = false
     var filePart: MultipartBody.Part? = null
 
     override fun backFromAddFragment() {
@@ -43,28 +49,29 @@ class CategoryDetailFragment: BaseFragment(context) {
         (requireActivity() as AppCompatActivity).setSupportActionBar(toolbarCategory)
         val actionbar = (requireActivity() as AppCompatActivity).supportActionBar
         actionbar?.setDisplayHomeAsUpEnabled(true)
+        setMenuVisibility(false)
         if(arguments?.getInt("categoryId", 0) == 0){
             actionbar?.title = getString(R.string.addCategory)
             imgCategoryDetail.setImageResource(R.drawable.add_image)
             edtCateName.setText("")
         } else {
             actionbar?.title = getString(R.string.categoryDetail)
+            isHaveBaseCover = true
             val r = Random()
             val token = r.nextInt()
             Glide.with(contextFragment)
                 .load(arguments?.getString("categoryUrl", "")+ "?" + token)
                 .override(180, 180)
+                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                 .placeholder(R.drawable.loading_icon)
                 .error(R.drawable.ic_launcher_foreground)
                 .into(imgCategoryDetail)
             edtCateName.setText(arguments?.getString("categoryName", ""))
         }
-
+        requireActivity().invalidateOptionsMenu()
     }
 
-    override fun initData(){
-
-    }
+    override fun initData(){}
 
     override fun initListener() {
         imgCategoryDetail.setOnClickListener{
@@ -82,35 +89,20 @@ class CategoryDetailFragment: BaseFragment(context) {
         }
 
         btnSendCategoryData.setOnClickListener{
-            if(!isUpdateCover || edtCateName.text == null){
-                Toast.makeText(requireContext(), Define.ToastMessage.INVALID_INPUT, Toast.LENGTH_SHORT).show()
-            } else {
-                if(arguments?.getInt("categoryId") == null){
-                    //add
-                    filePart = MultipartBody.Part.createFormData(
-                        "cover",
-                        "uploadFile",
-                        RequestBody.create(Define.Api.IMAGE_TYPE.toMediaTypeOrNull(), File(viewModel.coverPath!!))
-                    )
-
-                    viewModel.addCategory(
-                        MMKVHelper.getInstance().decodeString("jwt")!!,
-                        edtCateName.text.toString().trim(),
-                        filePart!!
-                    )
+            if(!isHaveBaseCover){
+                if( !isUpdateCover || edtCateName.text == null){
+                    Toast.makeText(requireContext(),Define.ToastMessage.INVALID_INPUT, Toast.LENGTH_SHORT).show()
                 } else {
-                    //update
-                    filePart = MultipartBody.Part.createFormData(
-                        "cover",
-                        "uploadFile",
-                        RequestBody.create(Define.Api.IMAGE_TYPE.toMediaTypeOrNull(), File(viewModel.coverPath!!))
-                    )
-                    viewModel.updateCategory(
-                        MMKVHelper.getInstance().decodeString("jwt")!!,
-                        arguments?.getInt("categoryId",0)!!.toLong(),
-                        edtCateName.text.toString().trim(),
-                        filePart!!
-                    )
+                    addCategory()
+                }
+
+            } else {
+                if(edtCateName.text == null){
+                    Toast.makeText(requireContext(),Define.ToastMessage.INVALID_INPUT, Toast.LENGTH_SHORT).show()
+                } else if (isUpdateCover){
+                    editCategory() // with image
+                } else {
+                    updateCategory() //within image
                 }
             }
         }
@@ -119,10 +111,49 @@ class CategoryDetailFragment: BaseFragment(context) {
             if(it == "Ok"){
                 Toast.makeText(requireContext(),Define.ToastMessage.INPUT_SUCCESS, Toast.LENGTH_SHORT).show()
                 getVC().backFromAddFragment()
+            } else if(it == "HTTP 409"){
+                Toast.makeText(requireContext(),Define.ToastMessage.CATEGORY_EXIST, Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(requireContext(),it, Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    fun addCategory(){
+        filePart = MultipartBody.Part.createFormData(
+            "cover",
+            "uploadFile",
+            RequestBody.create(Define.Api.IMAGE_TYPE.toMediaTypeOrNull(), File(viewModel.coverPath!!))
+        )
+
+        viewModel.addCategory(
+            MMKVHelper.getInstance().decodeString("jwt")!!,
+            edtCateName.text.toString().trim(),
+            filePart!!
+        )
+    }
+
+    fun updateCategory(){
+        viewModel.updateCategory(
+            MMKVHelper.getInstance().decodeString("jwt")!!,
+            arguments?.getInt("categoryId",0)!!.toLong(),
+            edtCateName.text.toString().trim(),
+            null
+        )
+    }
+
+    fun editCategory(){
+        filePart = MultipartBody.Part.createFormData(
+            "cover",
+            "uploadFile",
+            RequestBody.create(Define.Api.IMAGE_TYPE.toMediaTypeOrNull(), File(viewModel.coverPath!!))
+        )
+        viewModel.updateCategory(
+            MMKVHelper.getInstance().decodeString("jwt")!!,
+            arguments?.getInt("categoryId", 0)!!.toLong(),
+            edtCateName.text.toString().trim(),
+            filePart!!
+        )
     }
 
     private fun startGallery() {
@@ -132,13 +163,22 @@ class CategoryDetailFragment: BaseFragment(context) {
     }
 
     override fun backPressed(): Boolean {
-        getVC().backFromAddFragment()
+        val bundle = Bundle()
+        bundle.putString("lastestFragment", "Category")
+        getVC().backFromAddFragment(bundle)
         return false
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        val item = menu.findItem(R.id.itemAddCategory)
+        item.isVisible = false
+        super.onPrepareOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home ->{
+                Toast.makeText(requireContext(),Define.ToastMessage.INPUT_SUCCESS, Toast.LENGTH_SHORT).show()
                 getVC().backFromAddFragment()
             }
         }
@@ -156,6 +196,7 @@ class CategoryDetailFragment: BaseFragment(context) {
                         Glide.with(contextFragment)
                             .load(it)
                             .override(180, 180)
+                            .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                             .placeholder(R.drawable.loading_icon)
                             .error(R.drawable.ic_launcher_foreground)
                             .into(imgCategoryDetail)

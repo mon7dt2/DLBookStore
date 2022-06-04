@@ -1,7 +1,7 @@
 package com.base.mvvmbasekotlin.models.data
 
 data class AuthData(var id:  String,
-                    var displayName: String,
+                    var fullName: String,
                     var phone: String, var gender: Integer, var address: String,
                     var avatarUrl: String, var dateOfBirth: String, var email: String,
                     var accountID: String)

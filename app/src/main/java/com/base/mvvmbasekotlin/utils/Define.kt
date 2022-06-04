@@ -42,6 +42,7 @@ open class Define {
             val SIGNIN_PASSWORD_INVALID = "Mật khẩu không hợp lệ"
             val SIGNIN_INVALID = "Tên tài khoản mặt mật khẩu không đúng"
             val INPUT_SUCCESS = "Thao tác thành công"
+            val CATEGORY_EXIST = "Danh mục đã tồn tại"
             val REGISTER_SUCCESS = "Đăng ký tài khoản thành công"
             val INVALID_INPUT = "Vui lòng nhập đủ thông tin"
             val REGISTER_STAFF_SUCCESS = "Đăng ký tài khoản thành công, Hãy chờ quản trị viên duyệt"

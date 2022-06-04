@@ -36,9 +36,12 @@ interface ApiInterface {
     fun updateCateGory(@Header("Authorization") encodedString : String,
                        @Path("categoryID") categoryID: Long,
                        @Part("displayName") displayName : String,
-                       @Part cover: MultipartBody.Part): Single<UpdateOkResponse>
+                       @Part cover: MultipartBody.Part?): Single<UpdateOkResponse>
 
     @DELETE("/api/category/{categoryId}")
     fun deleteCategory(@Header("Authorization") encodedString : String,
                        @Path("categoryId")id: Long): Single<OkResponse>
+
+    @GET("/api/admins/customer")
+    fun getAllCustomer(@Header("Authorization") encodedString : String): Single<CustomerResponse>
 }

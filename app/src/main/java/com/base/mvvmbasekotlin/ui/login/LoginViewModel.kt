@@ -28,6 +28,13 @@ class LoginViewModel @Inject constructor(private var repo: Repository) : BaseVie
                 loading.postValue(false)
             }.subscribe({
                 response.postValue("HTTP OK")
+                MMKVHelper.getInstance().encode("fullName", it.data.fullName)
+                MMKVHelper.getInstance().encode("id", it.data.id)
+                MMKVHelper.getInstance().encode("avatarUrl", it.data.avatarUrl)
+                MMKVHelper.getInstance().encode("accountId", it.data.accountID)
+                MMKVHelper.getInstance().encode("dateOfBirth", it.data.dateOfBirth)
+                MMKVHelper.getInstance().encode("email", it.data.email)
+                MMKVHelper.getInstance().encode("address", it.data.address)
             }, {
                 response.postValue(it.message)
             })

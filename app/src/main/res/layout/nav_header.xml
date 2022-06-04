@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="150dp"
     android:gravity="start"
     android:padding="10dp"
     android:background="@color/colorPrimaryDark"
@@ -12,6 +12,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginLeft="20dp"
+        android:id="@+id/imgHeader"
         android:src="@drawable/ic_staff" />
 
     <TextView
@@ -19,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Name"
+        android:id="@+id/txtHeaderName"
         android:layout_marginLeft="20dp"
         android:textSize="26sp"
         android:textStyle="bold"

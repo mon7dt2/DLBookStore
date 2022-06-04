@@ -34,7 +34,7 @@ class Repository @Inject constructor(private val apiInterface: ApiInterface) {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun updateCategory(encodedString: String, categoryID: Long, displayName: String, cover: MultipartBody.Part): Single<UpdateOkResponse>{
+    fun updateCategory(encodedString: String, categoryID: Long, displayName: String, cover: MultipartBody.Part?): Single<UpdateOkResponse>{
         return apiInterface.updateCateGory(encodedString,categoryID, displayName, cover)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -42,6 +42,12 @@ class Repository @Inject constructor(private val apiInterface: ApiInterface) {
 
     fun deleteCategory(encodedString: String, categoryID: Long): Single<OkResponse>{
         return apiInterface.deleteCategory(encodedString,categoryID)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getAllCustomer(encodedString: String): Single<CustomerResponse>{
+        return apiInterface.getAllCustomer(encodedString)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_staff"
+        android:background="#c1c1c1"
+        android:id="@+id/imgCustomer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgCustomer"
+        android:id="@+id/layoutEdtCtmName"
+        android:layout_marginTop="10dp"
+        android:paddingTop="10dp"
+        app:hintAnimationEnabled="true"
+        app:hintTextColor="@color/colorPrimary"
+        app:hintEnabled="true">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/edtCtmName"
+            android:background="@drawable/bg_edt_outline"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:maxLines="1"
+            android:focusable="false"
+            android:hint="Họ và tên"
+            android:drawablePadding="10dp"
+            android:inputType="text"
+            android:maxLength="32"
+            android:paddingStart="10dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutEdtCtmName"
+        android:id="@+id/layoutEdtCtmPhone"
+        android:layout_marginTop="10dp"
+        android:paddingTop="10dp"
+        app:hintAnimationEnabled="true"
+        app:hintTextColor="@color/colorPrimary"
+        app:hintEnabled="true">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/edtCtmPhone"
+            android:background="@drawable/bg_edt_outline"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:maxLines="1"
+            android:focusable="false"
+            android:hint="Số điện thoại"
+            android:drawablePadding="10dp"
+            android:inputType="text"
+            android:maxLength="32"
+            android:paddingStart="10dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutEdtCtmPhone"
+        android:id="@+id/layoutEdtCtmEmail"
+        android:layout_marginTop="10dp"
+        android:paddingTop="10dp"
+        app:hintAnimationEnabled="true"
+        app:hintTextColor="@color/colorPrimary"
+        app:hintEnabled="true">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/edtCtmEmail"
+            android:background="@drawable/bg_edt_outline"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:maxLines="1"
+            android:focusable="false"
+            android:hint="Email"
+            android:drawablePadding="10dp"
+            android:inputType="text"
+            android:maxLength="32"
+            android:paddingStart="10dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutEdtCtmEmail"
+        android:id="@+id/layoutEdtCtmGender"
+        android:layout_marginTop="10dp"
+        android:paddingTop="10dp"
+        app:hintAnimationEnabled="true"
+        app:hintTextColor="@color/colorPrimary"
+        app:hintEnabled="true">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/edtCtmGender"
+            android:background="@drawable/bg_edt_outline"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:maxLines="1"
+            android:focusable="false"
+            android:hint="Giới tính"
+            android:drawablePadding="10dp"
+            android:inputType="text"
+            android:maxLength="32"
+            android:paddingStart="10dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutEdtCtmGender"
+        android:id="@+id/layoutEdtCtmBirth"
+        android:layout_marginTop="10dp"
+        android:paddingTop="10dp"
+        app:hintAnimationEnabled="true"
+        app:hintTextColor="@color/colorPrimary"
+        app:hintEnabled="true">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/edtCtmBirth"
+            android:background="@drawable/bg_edt_outline"
+            android:layout_marginLeft="20dp"
+            android:focusable="false"
+            android:layout_marginRight="20dp"
+            android:maxLines="1"
+            android:hint="Ngày sinh"
+            android:drawablePadding="10dp"
+            android:inputType="text"
+            android:maxLength="32"
+            android:paddingStart="10dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+</RelativeLayout>

@@ -31,6 +31,10 @@
     <string name="save">Lưu</string>
     <string name="categoryDetail">Chi tiết danh mục</string>
     <string name="addCategory">Thêm danh mục</string>
+    <string name="accept">Đồng ý</string>
+    <string name="reject">Hủy</string>
+    <string name="deleteCategory">Xóa danh mục</string>
+    <string name="confirmDeleteCate">Bạn có chắc muốn xóa danh mục này không?</string>
     <integer name="activity_anim_duration">300</integer>
     <integer name="activity_anim_duration_out">500</integer>
 </resources>
