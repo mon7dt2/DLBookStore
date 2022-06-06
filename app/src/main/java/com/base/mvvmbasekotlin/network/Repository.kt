@@ -84,4 +84,57 @@ class Repository @Inject constructor(private val apiInterface: ApiInterface) {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
+
+    fun addProduct(encodedString: String, displayName: String, description: String,
+                    price: Float, quantity: Int, author: String, publisher: String,
+                   categoryID: Long, providerID: Long, avatar: MultipartBody.Part): Single<OkResponse>{
+        return apiInterface.addProduct(encodedString, displayName, description, price,
+                                        quantity,author, publisher, categoryID, providerID, avatar)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun updateProduct(encodedString: String,id: String, displayName: String, description: String?,
+                   price: Float, quantity: Int, author: String, publisher: String,
+                   categoryID: Long, providerID: Long, avatar: MultipartBody.Part?): Single<OkResponse>{
+        return apiInterface.updateProduct(encodedString,id, displayName, description, price,
+            quantity,author, publisher, categoryID, providerID, avatar)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun deleteProduct(encodedString: String,id: String): Single<OkResponse>{
+        return apiInterface.deleteProduct(encodedString,id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getAllOrders(encodedString: String): Single<OrdersResponse>{
+        return apiInterface.getAllOrder(encodedString)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getOrderDetail(encodedString: String, orderID: String): Single<OrderDetailResponse>{
+        return apiInterface.getOrderDetail(encodedString, orderID)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getOrderByState(encodedString: String, state: Int): Single<OrdersResponse>{
+        return apiInterface.getOrderByState(encodedString, state)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+    fun updateOrderState(encodedString: String, orderID: String, state: Int): Single<OkResponse>{
+        return apiInterface.updateOrderStatus(encodedString,orderID, state)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getTotalCategory(encodedString: String): Single<TotalCategoryResponse>{
+        return apiInterface.getTotalCategory(encodedString)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 }

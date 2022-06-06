@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Tất cả"
+        android:id="@+id/item_state_all"/>
+    <item android:title="Đang giao"
+        android:id="@+id/item_state_0"/>
+    <item android:title="Đã giao"
+        android:id="@+id/item_state_1"/>
+    <item android:title="Đã hủy"
+        android:id="@+id/item_state_n1"/>
+</menu>

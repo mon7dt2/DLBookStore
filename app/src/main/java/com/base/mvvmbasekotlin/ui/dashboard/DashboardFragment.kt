@@ -14,6 +14,7 @@ import com.base.mvvmbasekotlin.base.ViewController
 import com.base.mvvmbasekotlin.ui.category.CategoryFragment
 import com.base.mvvmbasekotlin.ui.customer.CustomerFragment
 import com.base.mvvmbasekotlin.ui.dashboard.detail.DashboardDetailFragment
+import com.base.mvvmbasekotlin.ui.order.OrderFragment
 import com.base.mvvmbasekotlin.ui.product.ProductFragment
 import com.base.mvvmbasekotlin.ui.provider.ProviderFragment
 import com.base.mvvmbasekotlin.utils.MMKVHelper
@@ -40,6 +41,9 @@ class DashboardFragment: BaseFragment(context){
                 }
                 "Product" -> {
                     replaceFragment(ProductFragment(), R.id.containerDashboard, animation = false)
+                }
+                "Order" -> {
+                    replaceFragment(OrderFragment(), R.id.containerDashboard, animation = false)
                 }
             }
         }
@@ -87,6 +91,10 @@ class DashboardFragment: BaseFragment(context){
                 R.id.nav_product -> {
                     actionbar?.title = "Sản phẩm"
                     replaceFragment(ProductFragment(), R.id.containerDashboard, animation = false)
+                }
+                R.id.nav_order -> {
+                    actionbar?.title = "Hoá đơn"
+                    replaceFragment(OrderFragment(), R.id.containerDashboard, animation = false)
                 }
             }
             drawer_layout.closeDrawers()

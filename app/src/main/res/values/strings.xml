@@ -38,6 +38,12 @@
     <string name="customerDetail">Chi tiết khách hàng</string>
     <string name="providerDetail">Chi tiết nhà cung cấp</string>
     <string name="delete">xóa</string>
+    <string name="productDetail">Chi tiết sản phẩm</string>
+    <string name="selectCategory">Chọn danh mục</string>
+    <string name="selectProvider">Chọn nhà cung cấp</string>
+    <string name="deleteProduct">Xóa sản phẩm</string>
+    <string name="confirmDeleteProduct">Bạn có chắc muốn xóa sản phẩm này?</string>
+    <string name="orderDetail">Chi tiết hóa đơn</string>
     <integer name="activity_anim_duration">300</integer>
     <integer name="activity_anim_duration_out">500</integer>
 </resources>

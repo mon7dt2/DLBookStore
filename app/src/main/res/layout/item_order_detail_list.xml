@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:layout_margin="10dp"
+    android:padding="10dp">
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="#c1c1c1"
+        android:src="@drawable/ic_product"
+        android:id="@+id/imgProductDetail"
+        android:layout_marginRight="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:maxLength="40"
+        android:text="Name"
+        android:layout_toRightOf="@+id/imgProductDetail"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:id="@+id/txtNameProductOD" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:maxLength="40"
+        android:text="so luong mua"
+        android:layout_below="@+id/txtNameProductOD"
+        android:layout_toRightOf="@+id/imgProductDetail"
+        android:textStyle="italic"
+        android:layout_marginTop="12dp"
+        android:textSize="16sp"
+        android:id="@+id/txtDetailQuantity" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:maxLength="40"
+        android:text="don gia"
+        android:layout_below="@+id/txtDetailQuantity"
+        android:layout_toRightOf="@+id/imgProductDetail"
+        android:textStyle="italic"
+        android:textSize="16sp"
+        android:layout_marginTop="12dp"
+        android:id="@+id/txtDetailPrice" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:maxLength="40"
+        android:text="tong thanh tien"
+        android:layout_toRightOf="@+id/imgProductDetail"
+        android:layout_alignParentBottom="true"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:id="@+id/txtDetailTotal" />
+
+</RelativeLayout>

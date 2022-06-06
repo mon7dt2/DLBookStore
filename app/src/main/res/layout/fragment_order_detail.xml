@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarOrder"
+            android:layout_width="match_parent"
+            app:title="@string/orderDetail"
+            app:titleTextColor="@color/white"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ToolbarColoredBackArrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thông tin khách hàng"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/txtCustomerInfo"
+            android:layout_below="@+id/toolbarOrder" />
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/ic_staff"
+            android:background="#c5c5c5"
+            android:layout_below="@+id/txtCustomerInfo"
+            android:id="@+id/imgCustomerDetail"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="customer name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:id="@+id/txtODCName"
+            android:layout_below="@+id/imgCustomerDetail" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="customer phone"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/txtODCPhone"
+            android:layout_below="@+id/txtODCName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="customer address"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/txtODCAddress"
+            android:layout_below="@+id/txtODCPhone" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Danh sách sản phẩm"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:id="@+id/txtListProduct"
+            android:layout_below="@+id/txtODCAddress" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/orderDetailList"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/txtListProduct"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_order_detail_list" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Xác nhận đơn hàng"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_btn_accent"
+            android:layout_margin="20dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:id="@+id/btnConfirmOrder"
+            android:layout_below="@+id/orderDetailList"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Hủy đơn hàng"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_edt_outline"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/red"
+            android:textSize="18sp"
+            android:id="@+id/btnCancelOrder"
+            android:layout_below="@+id/btnConfirmOrder" />
+    </RelativeLayout>
+</ScrollView>

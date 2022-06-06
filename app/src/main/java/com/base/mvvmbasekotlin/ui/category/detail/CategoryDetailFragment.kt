@@ -173,11 +173,6 @@ class CategoryDetailFragment: BaseFragment(context) {
         return false
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        val item = menu.findItem(R.id.itemAddCategory)
-        item.isVisible = false
-        super.onPrepareOptionsMenu(menu)
-    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

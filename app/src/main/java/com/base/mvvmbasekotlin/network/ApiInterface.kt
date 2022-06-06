@@ -52,15 +52,65 @@ interface ApiInterface {
     @POST("/api/provider")
     fun addProvider(@Header("Authorization") encodedString : String,
                     @Body body: ProviderBodyRequest): Single<SingleProviderResponse>
-    @PATCH("api/provider/{providerId}")
+    @PATCH("/api/provider/{providerId}")
     fun updateProvider(@Header("Authorization") encodedString : String,
                     @Path("providerId") id: Int,
                      @Body body: ProviderBodyRequest): Single<UpdateOkResponse>
-    @DELETE("api/provider/{providerId}")
+    @DELETE("/api/provider/{providerId}")
     fun deleteProvider(@Header("Authorization") encodedString : String,
                      @Path("providerId") id: Int): Single<UpdateOkResponse>
 
-    @GET("api/products")
+    @GET("/api/product")
     fun getAllProducts(): Single<ProductListResponse>
 
+    @Multipart
+    @POST("/api/product")
+    fun addProduct(@Header("Authorization") encodedString : String,
+                    @Part("displayName") displayName: String,
+                    @Part("description") description: String,
+                    @Part("price") price: Float,
+                    @Part("quantity") quantity: Int,
+                    @Part("author") author: String,
+                    @Part("publisher") publisher: String,
+                    @Part("categoryID") categoryID: Long,
+                    @Part("providerID") providerID: Long,
+                    @Part cover: MultipartBody.Part?): Single<OkResponse>
+
+    @Multipart
+    @PATCH("/api/product/{productId}")
+    fun updateProduct(@Header("Authorization") encodedString : String,
+                    @Path("productId") id: String,
+                   @Part("displayName") displayName: String,
+                   @Part("description") description: String?,
+                   @Part("price") price: Float,
+                   @Part("quantity") quantity: Int,
+                   @Part("author") author: String,
+                   @Part("publisher") publisher: String,
+                   @Part("categoryID") categoryID: Long,
+                   @Part("providerID") providerID: Long,
+                   @Part cover: MultipartBody.Part?): Single<OkResponse>
+
+    @DELETE("/api/product/{bookID}")
+    fun deleteProduct(@Header("Authorization") encodedString : String,
+                      @Path("bookID") id: String): Single<OkResponse>
+
+    @GET("/api/orders")
+    fun getAllOrder(@Header("Authorization") encodedString : String): Single<OrdersResponse>
+
+    @GET("/api/order/{orderID}")
+    fun getOrderDetail(@Header("Authorization") encodedString : String,
+                        @Path("orderID") id: String): Single<OrderDetailResponse>
+
+    @Multipart
+    @PUT("/api/order/{orderID}")
+    fun updateOrderStatus(@Header("Authorization") encodedString : String,
+                       @Path("orderID") id: String,
+                       @Part("state") state: Int ): Single<OkResponse>
+
+    @GET("/api/order/state/{state}")
+    fun getOrderByState(@Header("Authorization") encodedString : String,
+                       @Path("state") state: Int): Single<OrdersResponse>
+
+    @GET("/api/admin/total/category")
+    fun getTotalCategory(@Header("Authorization") encodedString : String): Single<TotalCategoryResponse>
 }
