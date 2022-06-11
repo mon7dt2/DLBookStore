@@ -85,6 +85,17 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_order_detail_list" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Toorng"
+            android:textSize="20sp"
+            android:textColor="@color/red"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:id="@+id/txtTotalProduct"
+            android:layout_below="@+id/orderDetailList" />
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -95,7 +106,7 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:id="@+id/btnConfirmOrder"
-            android:layout_below="@+id/orderDetailList"/>
+            android:layout_below="@+id/txtTotalProduct"/>
 
         <Button
             android:layout_width="match_parent"

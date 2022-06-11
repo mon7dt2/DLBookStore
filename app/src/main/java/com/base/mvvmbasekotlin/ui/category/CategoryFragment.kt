@@ -4,11 +4,9 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.Window
+import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import com.base.mvvmbasekotlin.BaseApplication.Companion.context
 import com.base.mvvmbasekotlin.R
@@ -19,6 +17,7 @@ import com.base.mvvmbasekotlin.utils.Define
 import com.base.mvvmbasekotlin.utils.MMKVHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_category.*
+import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 
 @AndroidEntryPoint
@@ -38,34 +37,41 @@ class CategoryFragment: BaseFragment(context) {
         super.onResume()
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
     override fun initView() {
-        setHasOptionsMenu(true)
-        viewModel.getLoadingStatus().observe(requireActivity(), {
-            if (it){
+        viewModel.getLoadingStatus().observe(requireActivity()) {
+            if (it) {
                 loadingDialog.show()
             } else {
                 loadingDialog.hide()
             }
-        })
-        viewModel.getResponse().observe(requireActivity(), {
-            if(it == "HTTP OK"){
+        }
+        viewModel.getResponse().observe(requireActivity()) {
+            if (it == "HTTP OK") {
                 categoryList.adapter = adapter
             }
-        })
-        viewModel.getData().observe(requireActivity(), {
-            if(it != null){
+        }
+        viewModel.getData().observe(requireActivity()) {
+            if (it != null) {
                 categoryList.adapter = adapter
-                adapter.addModels(it.results,true)
+                adapter.addModels(it.results, true)
                 adapter.notifyDataSetChanged()
             }
-        })
-        viewModel.getDeleteStatus().observe(viewLifecycleOwner, {
-            if(it?.code == 200){
+        }
+        viewModel.getDeleteStatus().observe(viewLifecycleOwner) {
+            if (it?.code == 200) {
                 adapter.clear()
                 adapter.notifyDataSetChanged()
                 viewModel.getAllCategories()
             }
-        })
+        }
     }
 
     override fun initData() {
@@ -83,21 +89,6 @@ class CategoryFragment: BaseFragment(context) {
         adapter.onClickRemoveCategory = {
             showDialog(it.id)
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        val inflater1 = requireActivity().menuInflater
-        inflater1.inflate(R.menu.menu_category, menu)
-        super.onCreateOptionsMenu(menu, inflater1)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId){
-            R.id.itemAddCategory -> {
-                getVC().addFragment(CategoryDetailFragment::class.java)
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun backPressed(): Boolean {

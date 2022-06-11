@@ -32,7 +32,6 @@ import okhttp3.RequestBody
 import java.io.File
 import java.util.*
 
-
 @AndroidEntryPoint
 class CategoryDetailFragment: BaseFragment(context) {
     val REQUEST_CODE_IMAGE_STORAGE = 12111
@@ -50,7 +49,7 @@ class CategoryDetailFragment: BaseFragment(context) {
         (requireActivity() as AppCompatActivity).setSupportActionBar(toolbarCategory)
         val actionbar = (requireActivity() as AppCompatActivity).supportActionBar
         actionbar?.setDisplayHomeAsUpEnabled(true)
-        setMenuVisibility(false)
+        this.setHasOptionsMenu(true)
         if(arguments?.getInt("categoryId") == null) {
             actionbar?.title = getString(R.string.addCategory)
             imgCategoryDetail.setImageResource(R.drawable.add_image)
@@ -69,7 +68,6 @@ class CategoryDetailFragment: BaseFragment(context) {
                 .into(imgCategoryDetail)
             edtCateName.setText(arguments?.getString("categoryName", ""))
         }
-        requireActivity().invalidateOptionsMenu()
     }
 
     override fun initData(){}
@@ -109,18 +107,30 @@ class CategoryDetailFragment: BaseFragment(context) {
             }
         }
 
-        viewModel.getResponse().observe(viewLifecycleOwner, {
-            if(it == "Ok"){
-                Toast.makeText(requireContext(),Define.ToastMessage.INPUT_SUCCESS, Toast.LENGTH_SHORT).show()
-                val bundle = Bundle()
-                bundle.putString("lastestFragment", "Category")
-                getVC().backFromAddFragment(bundle)
-            } else if(it == "HTTP 409"){
-                Toast.makeText(requireContext(),Define.ToastMessage.CATEGORY_EXIST, Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(requireContext(),it, Toast.LENGTH_SHORT).show()
+        viewModel.getResponse().observe(viewLifecycleOwner) {
+            when (it) {
+                "Ok" -> {
+                    Toast.makeText(
+                        requireContext(),
+                        Define.ToastMessage.INPUT_SUCCESS,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    val bundle = Bundle()
+                    bundle.putString("lastestFragment", "Category")
+                    getVC().backFromAddFragment(bundle)
+                }
+                "HTTP 409" -> {
+                    Toast.makeText(
+                        requireContext(),
+                        Define.ToastMessage.CATEGORY_EXIST,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else -> {
+                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                }
             }
-        })
+        }
     }
 
     fun addCategory(){
@@ -160,6 +170,22 @@ class CategoryDetailFragment: BaseFragment(context) {
         )
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                val bundle = Bundle()
+                bundle.putString("lastestFragment", "Category")
+                getVC().backFromAddFragment(bundle)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun startGallery() {
         val cameraIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         cameraIntent.type = Define.Api.IMAGE_TYPE
@@ -171,17 +197,6 @@ class CategoryDetailFragment: BaseFragment(context) {
         bundle.putString("lastestFragment", "Category")
         getVC().backFromAddFragment(bundle)
         return false
-    }
-
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home ->{
-                Toast.makeText(requireContext(),Define.ToastMessage.INPUT_SUCCESS, Toast.LENGTH_SHORT).show()
-                getVC().backFromAddFragment()
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

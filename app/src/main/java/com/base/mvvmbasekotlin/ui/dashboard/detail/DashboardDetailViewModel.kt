@@ -16,17 +16,15 @@ class DashboardDetailViewModel @Inject constructor(val repo: Repository) : BaseV
     }
 
     fun getTotalCategory(encodedString: String){
-        fun getOrderDetail(encodedString: String){
-            mDisposable.add(repo.getTotalCategory(encodedString)
-                .doOnDispose {
-                    loading.postValue(true)
-                }.doFinally {
-                    loading.postValue(false)
-                }.subscribe({
-                    data.postValue(it)
-                }, {
-                    data.postValue(null)
-                }))
-        }
+        mDisposable.add(repo.getTotalCategory(encodedString)
+            .doOnDispose {
+                loading.postValue(true)
+            }.doFinally {
+                loading.postValue(false)
+            }.subscribe({
+                data.postValue(it)
+            }, {
+                data.postValue(null)
+            }))
     }
 }

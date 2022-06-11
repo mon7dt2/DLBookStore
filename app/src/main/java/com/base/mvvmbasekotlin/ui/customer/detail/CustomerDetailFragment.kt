@@ -1,6 +1,9 @@
 package com.base.mvvmbasekotlin.ui.customer.detail
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import com.base.mvvmbasekotlin.BaseApplication.Companion.context
@@ -25,6 +28,9 @@ class CustomerDetailFragment: BaseFragment(context) {
     override fun initView() {
         (requireActivity() as AppCompatActivity).setSupportActionBar(toolbarCustomer)
         val actionbar = (requireActivity() as AppCompatActivity).supportActionBar
+        actionbar?.isHideOnContentScrollEnabled = false
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+        this.setHasOptionsMenu(true)
         val r = Random()
         val token: Int = r.nextInt()
 
@@ -50,6 +56,22 @@ class CustomerDetailFragment: BaseFragment(context) {
 
     override fun initListener() {
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                val bundle = Bundle()
+                bundle.putString("lastestFragment", "Customer")
+                getVC().backFromAddFragment(bundle)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun backPressed(): Boolean {

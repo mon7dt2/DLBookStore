@@ -1,6 +1,10 @@
 package com.base.mvvmbasekotlin.ui.order.detail
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import com.base.mvvmbasekotlin.BaseApplication.Companion.context
 import com.base.mvvmbasekotlin.R
@@ -12,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_order_detail.*
 import java.util.*
 
@@ -31,7 +36,11 @@ class OrderDetailFragment: BaseFragment(context) {
         get() = R.layout.fragment_order_detail
 
     override fun initView() {
-
+        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbarOrder)
+        val actionbar = (requireActivity() as AppCompatActivity).supportActionBar
+        actionbar?.isHideOnContentScrollEnabled = false
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+        this.setHasOptionsMenu(true)
     }
 
     override fun initData() {
@@ -44,8 +53,8 @@ class OrderDetailFragment: BaseFragment(context) {
     }
 
     override fun initListener() {
-        viewModel.getData().observe(viewLifecycleOwner, {
-            if(it != null){
+        viewModel.getData().observe(viewLifecycleOwner) {
+            if (it != null) {
                 orderDetailList.adapter = adapter
                 adapter.clear()
                 adapter.notifyDataSetChanged()
@@ -64,21 +73,38 @@ class OrderDetailFragment: BaseFragment(context) {
                 txtODCName.text = order?.customer?.fullName
                 txtODCPhone.text = order?.customer?.phone
                 txtODCAddress.text = order?.address
+                txtTotalProduct.text = "Tổng: " + order?.totalPrice + " đ"
             }
-        })
-        viewModel.getResponse().observe(viewLifecycleOwner, {
-            if(it != null){
+        }
+        viewModel.getResponse().observe(viewLifecycleOwner) {
+            if (it != null) {
                 val bundle = Bundle()
                 bundle.putString("lastestFragment", "Order")
                 getVC().backFromAddFragment(bundle)
             }
-        })
+        }
         btnConfirmOrder.setOnClickListener {
             viewModel.updateOrderDetail(jwt!!, order?.id!!, 1)
         }
         btnCancelOrder.setOnClickListener {
             viewModel.updateOrderDetail(jwt!!, order?.id!!, -1)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                val bundle = Bundle()
+                bundle.putString("lastestFragment", "Order")
+                getVC().backFromAddFragment(bundle)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun backPressed(): Boolean {

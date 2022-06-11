@@ -27,20 +27,20 @@ class ProviderFragment: BaseFragment(context) {
 
     override fun initView() {
         setHasOptionsMenu(true)
-        viewModel.getLoadingStatus().observe(requireActivity(), {
-            if (it){
+        viewModel.getLoadingStatus().observe(requireActivity()) {
+            if (it) {
                 loadingDialog.show()
             } else {
                 loadingDialog.hide()
             }
-        })
-        viewModel.getResponse().observe(requireActivity(), {
-            if(it != null){
+        }
+        viewModel.getResponse().observe(requireActivity()) {
+            if (it != null) {
                 providerList.adapter = adapter
-                adapter.addModels(it.data.results,true)
+                adapter.addModels(it.data.results, true)
                 adapter.notifyDataSetChanged()
             }
-        })
+        }
     }
 
     override fun initData() {

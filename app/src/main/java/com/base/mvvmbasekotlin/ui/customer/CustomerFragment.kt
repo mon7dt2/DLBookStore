@@ -24,20 +24,20 @@ class CustomerFragment: BaseFragment(context) {
         get() = R.layout.fragment_customer
 
     override fun initView() {
-        viewModel.getLoadingStatus().observe(requireActivity(), {
-            if (it){
+        viewModel.getLoadingStatus().observe(requireActivity()) {
+            if (it) {
                 loadingDialog.show()
             } else {
                 loadingDialog.hide()
             }
-        })
-        viewModel.getData().observe(requireActivity(), {
-            if(it != null){
+        }
+        viewModel.getData().observe(requireActivity()) {
+            if (it != null) {
                 customerList.adapter = adapter
-                adapter.addModels(it.data,true)
+                adapter.addModels(it.data, true)
                 adapter.notifyDataSetChanged()
             }
-        })
+        }
     }
 
     override fun initData() {

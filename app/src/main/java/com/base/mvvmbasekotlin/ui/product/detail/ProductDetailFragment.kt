@@ -63,8 +63,9 @@ class ProductDetailFragment: BaseFragment(context) {
     override fun initView() {
         (requireActivity() as AppCompatActivity).setSupportActionBar(toolbarProduct)
         val actionbar = (requireActivity() as AppCompatActivity).supportActionBar
+        actionbar?.isHideOnContentScrollEnabled = false
+        actionbar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
-        requireActivity().invalidateOptionsMenu()
     }
 
     override fun initData() {
@@ -95,34 +96,34 @@ class ProductDetailFragment: BaseFragment(context) {
     }
 
     override fun initListener() {
-        viewModel.getDataCategory().observe(viewLifecycleOwner, {
-            if(it?.results?.isNotEmpty() == true){
-                for(category in it.results){
+        viewModel.getDataCategory().observe(viewLifecycleOwner) {
+            if (it?.results?.isNotEmpty() == true) {
+                for (category in it.results) {
                     listCate.add(category.displayName)
                     listCateID.add(category.id)
-                    if(arguments?.getString("stateGo").equals("update")){
+                    if (arguments?.getString("stateGo").equals("update")) {
                         val product = arguments?.getSerializable("product") as ProductPreview
-                        if(category.id == product.category.id.toLong()){
+                        if (category.id == product.category.id.toLong()) {
                             edtProductCate.setText(category.displayName)
                         }
                     }
                 }
             }
-        })
-        viewModel.getDataProvider().observe(viewLifecycleOwner, {
-            if(it?.results?.isNotEmpty() == true){
-                for(provider in it.results){
+        }
+        viewModel.getDataProvider().observe(viewLifecycleOwner) {
+            if (it?.results?.isNotEmpty() == true) {
+                for (provider in it.results) {
                     listProvider.add(provider.displayName)
                     listProviderID.add(provider.id)
-                    if(arguments?.getString("stateGo").equals("update")){
+                    if (arguments?.getString("stateGo").equals("update")) {
                         val product = arguments?.getSerializable("product") as ProductPreview
-                        if(provider.id == product.provider.id){
+                        if (provider.id == product.provider.id) {
                             edtProductProvider.setText(provider.displayName)
                         }
                     }
                 }
             }
-        })
+        }
         edtProductCate.setOnClickListener {
             showDialogCategory()
         }
@@ -186,12 +187,13 @@ class ProductDetailFragment: BaseFragment(context) {
                 startGallery()
             }
         }
-        viewModel.getDataResponse().observe(viewLifecycleOwner, {
-            Toast.makeText(requireContext(),Define.ToastMessage.INPUT_SUCCESS, Toast.LENGTH_SHORT).show()
+        viewModel.getDataResponse().observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), Define.ToastMessage.INPUT_SUCCESS, Toast.LENGTH_SHORT)
+                .show()
             val bundle = Bundle()
-            bundle.putString("lastestFragment","Product")
+            bundle.putString("lastestFragment", "Product")
             getVC().backFromAddFragment(bundle)
-        })
+        }
     }
 
     override fun backPressed(): Boolean {
@@ -201,23 +203,22 @@ class ProductDetailFragment: BaseFragment(context) {
         return false
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        val item = menu.findItem(R.id.itemAddCategory)
-        item.isVisible = false
-        super.onPrepareOptionsMenu(menu)
-    }
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        val inflater1 = requireActivity().menuInflater
-        inflater1.inflate(R.menu.menu_product, menu)
-        super.onCreateOptionsMenu(menu, inflater1)
+        menu.clear()
+        inflater.inflate(R.menu.menu_product, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             R.id.itemDelete -> {
                 showDialogDelete((arguments?.getSerializable("product") as ProductPreview).id)
+            }
+            android.R.id.home -> {
+                val bundle = Bundle()
+                bundle.putString("lastestFragment","Product")
+                getVC().backFromAddFragment(bundle)
             }
         }
         return super.onOptionsItemSelected(item)

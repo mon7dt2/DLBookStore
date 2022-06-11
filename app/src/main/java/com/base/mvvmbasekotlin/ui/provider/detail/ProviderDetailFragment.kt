@@ -1,8 +1,12 @@
 package com.base.mvvmbasekotlin.ui.provider.detail
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View.GONE
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import com.base.mvvmbasekotlin.BaseApplication.Companion.context
 import com.base.mvvmbasekotlin.R
@@ -13,6 +17,7 @@ import com.base.mvvmbasekotlin.utils.MMKVHelper
 import com.base.mvvmbasekotlin.utils.ValidateEmail
 import com.base.mvvmbasekotlin.utils.ValidatePhone
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_provider_detail.*
 
 @AndroidEntryPoint
@@ -25,7 +30,11 @@ class ProviderDetailFragment: BaseFragment(context) {
         get() = R.layout.fragment_provider_detail
 
     override fun initView() {
-
+        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbarProvider)
+        val actionbar = (requireActivity() as AppCompatActivity).supportActionBar
+        actionbar?.isHideOnContentScrollEnabled = false
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+        this.setHasOptionsMenu(true)
     }
 
     override fun initData() {
@@ -64,30 +73,56 @@ class ProviderDetailFragment: BaseFragment(context) {
             viewModel.deleteProvider(MMKVHelper.getInstance().decodeString("jwt", "")!!,
                 arguments?.getInt("providerId", 0)!!)
         }
-        viewModel.getAddResponse().observe(viewLifecycleOwner, {
-            if(it != null) {
-                Toast.makeText(requireContext(), Define.ToastMessage.INPUT_SUCCESS, Toast.LENGTH_SHORT).show()
+        viewModel.getAddResponse().observe(viewLifecycleOwner) {
+            if (it != null) {
+                Toast.makeText(
+                    requireContext(),
+                    Define.ToastMessage.INPUT_SUCCESS,
+                    Toast.LENGTH_SHORT
+                ).show()
                 val bundle = Bundle()
                 bundle.putString("lastestFragment", "Provider")
                 getVC().backFromAddFragment(bundle)
             } else {
-                Toast.makeText(requireContext(),"Có lỗi xảy ra", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Có lỗi xảy ra", Toast.LENGTH_SHORT).show()
             }
-        })
-        viewModel.getOkResponse().observe(viewLifecycleOwner, {
-            if(it != null) {
-                Toast.makeText(requireContext(), Define.ToastMessage.INPUT_SUCCESS, Toast.LENGTH_SHORT).show()
+        }
+        viewModel.getOkResponse().observe(viewLifecycleOwner) {
+            if (it != null) {
+                Toast.makeText(
+                    requireContext(),
+                    Define.ToastMessage.INPUT_SUCCESS,
+                    Toast.LENGTH_SHORT
+                ).show()
                 val bundle = Bundle()
                 bundle.putString("lastestFragment", "Provider")
                 getVC().backFromAddFragment(bundle)
             } else {
-                Toast.makeText(requireContext(),"Có lỗi xảy ra", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Có lỗi xảy ra", Toast.LENGTH_SHORT).show()
             }
-        })
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                val bundle = Bundle()
+                bundle.putString("lastestFragment", "Order")
+                getVC().backFromAddFragment(bundle)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun backPressed(): Boolean {
-        getVC().backFromAddFragment()
+        val bundle = Bundle()
+        bundle.putString("lastestFragment", "Order")
+        getVC().backFromAddFragment(bundle)
         return false
     }
 
